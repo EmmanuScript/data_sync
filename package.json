@@ -1,0 +1,30 @@
+{
+  "name": "data-sync-cli",
+  "version": "1.2.3",
+  "description": "A CLI tool for syncing data between heterogeneous sources in real-time",
+  "main": "src/index.js",
+  "bin": {
+    "dsync": "src/index.js"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest tests/",
+    "lint": "eslint src/"
+  },
+  "keywords": [
+    "cli",
+    "sync",
+    "data",
+    "real-time"
+  ],
+  "author": "DevOps Team",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^9.0.0",
+    "inquirer": "^8.0.0"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0",
+    "eslint": "^8.0.0"
+  }
+}

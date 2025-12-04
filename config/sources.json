@@ -1,0 +1,39 @@
+{
+  "sources": {
+    "postgres-db": {
+      "type": "postgresql",
+      "host": "localhost",
+      "port": 5432,
+      "database": "prod_db",
+      "connectionString": "TODO: Add format spec"
+    },
+    "mysql-target": {
+      "type": "mysql",
+      "host": "localhost",
+      "port": 3306,
+      "database": "target_db"
+    },
+    "remote-api": {
+      "type": "rest",
+      "endpoint": "https://api.example.com/data",
+      "authentication": "bearer"
+    },
+    "local-cache": {
+      "type": "redis",
+      "host": "localhost",
+      "port": 6379
+    }
+  },
+  "syncRules": {
+    "default": {
+      "mode": "incremental",
+      "interval": "TODO: How often to sync? cron format or milliseconds?"
+    }
+  },
+  "transformationSchema": {
+    "TODO": "Define how to map fields between PostgreSQL and MySQL"
+  },
+  "conflictResolution": {
+    "strategy": "TODO: last-write-wins? or first-write-wins? or merge?"
+  }
+}

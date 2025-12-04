@@ -1,0 +1,64 @@
+/**
+ * Example configuration for advanced use cases
+ *
+ * WARNING: Some features in this config are not implemented
+ */
+
+{
+  "mode": "incremental",
+  "timeout": 60000,
+  "retries": 5,
+  "logLevel": "debug",
+
+  "sources": {
+    "primary": {
+      "type": "postgresql",
+      "host": "prod-db.example.com",
+      "port": 5432
+      // TODO: How to handle authentication? Plain password? Environment variables? Secrets manager?
+    },
+    "secondary": {
+      "type": "mysql",
+      "host": "backup-db.example.com",
+      "port": 3306,
+      "ssl": true
+      // TODO: SSL certificate validation not implemented
+    },
+    "cache": {
+      "type": "redis",
+      "host": "cache.example.com",
+      "port": 6379,
+      "password": "${REDIS_PASSWORD}"
+      // NOTE: Environment variable substitution not implemented
+    }
+  },
+
+  "syncSchedule": {
+    "interval": "TODO: Is this seconds, milliseconds, or cron expression?",
+    "concurrency": "TODO: How many concurrent syncs allowed?"
+  },
+
+  "transformations": {
+    "field_mapping": {
+      "user_id": "userId",
+      "created_at": "createdTimestamp"
+      // TODO: How to handle field type conversions? (e.g., datetime string to timestamp)
+    },
+    "filters": {
+      "exclude_deleted": true
+      // TODO: How are deleted records handled in incremental sync?
+    }
+  },
+
+  "webhooks": {
+    "onSyncComplete": "https://api.example.com/webhooks/sync-complete",
+    "onSyncError": "https://api.example.com/webhooks/sync-error"
+    // TODO: Webhook retry policy? Authentication? Timeout?
+  },
+
+  "monitoring": {
+    "metricsEndpoint": "http://prometheus:9090",
+    "tracing": "jaeger"
+    // TODO: Integration not implemented
+  }
+}
