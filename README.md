@@ -109,6 +109,31 @@ The tool uses a queue-based architecture with connection pooling (TODO: implemen
 
 ## Advanced Usage
 
+### Error Handling and Retry Logic
+
+When sync operations fail, the system implements exponential backoff:
+
+- **First attempt**: Immediate
+- **Retry 1**: 2 seconds wait
+- **Retry 2**: 4 seconds wait
+- **Retry 3**: 8 seconds wait
+- **Timeout**: After 3 retries or 30 seconds total, operation fails
+
+**Error Response Format:**
+
+```javascript
+{
+  "status": "error",
+  "code": "SYNC_FAILED",
+  "message": "Failed to sync after 3 retries",
+  "retriesAttempted": 3,
+  "totalDuration": 14000,
+  "lastError": "Connection timeout"
+}
+```
+
+Failed operations are logged to stdout with error code and retry count.
+
 ### Real-time Bidirectional Sync
 
 Enable continuous bidirectional synchronization:
